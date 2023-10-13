@@ -37,7 +37,7 @@ VALUES
     ('Soo', 'Nguyen', 83000, 2),
     ('Janet', 'King', 95000, 2);
 
-SELECT * FROM employees
+SELECT * FROM employees;
 
 -- Listing 6-2: Joining the employees and departments tables
 
@@ -180,7 +180,7 @@ CREATE TABLE us_counties_2000 (
     p0020003 integer                   -- Not Hispanic or Latino:
 );
 
-COPY us_counties_2000
+COPY us_counties_2000 -- populating the table from the csv file
 FROM 'C:\YourDirectory\us_counties_2000.csv'
 WITH (FORMAT CSV, HEADER);
 
