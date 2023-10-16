@@ -43,18 +43,18 @@ CREATE TABLE natural_key_composite_example (
 -- Listing 7-4: Example of a composite primary key violation
 
 INSERT INTO natural_key_composite_example (student_id, school_day, present)
-VALUES(775, '1/22/2017', 'Y');
+VALUES(775, '2017/01/22', 'Y');
 
 INSERT INTO natural_key_composite_example (student_id, school_day, present)
-VALUES(775, '1/23/2017', 'Y');
+VALUES(775, '2017/01/23', 'Y');
 
 INSERT INTO natural_key_composite_example (student_id, school_day, present)
-VALUES(775, '1/23/2017', 'N');
+VALUES(775, '2017/01/24', 'N');
 
 -- Listing 7-5: Declaring a bigserial column as a surrogate key
 
 CREATE TABLE surrogate_key_example (
-    order_number bigserial,
+    order_number bigserial, -- auto generated
     product_name varchar(50),
     order_date date,
     CONSTRAINT order_key PRIMARY KEY (order_number)
@@ -70,27 +70,34 @@ SELECT * FROM surrogate_key_example;
 -- Listing 7-6: A foreign key example
 
 CREATE TABLE licenses (
-    license_id varchar(10),
+    license_id varchar(10),--primary key defined by the constraint(will be unique)
     first_name varchar(50),
     last_name varchar(50),
-    CONSTRAINT licenses_key PRIMARY KEY (license_id)
+    CONSTRAINT licenses_key PRIMARY KEY (license_id)--constraint is called license_key
 );
 
 CREATE TABLE registrations (
     registration_id varchar(10),
-    registration_date date,
-    license_id varchar(10) REFERENCES licenses (license_id),
+    registration_date date,--the below person registered on this date
+    license_id varchar(10) REFERENCES licenses (license_id),--license in the licenses table
     CONSTRAINT registration_key PRIMARY KEY (registration_id, license_id)
 );
 
 INSERT INTO licenses (license_id, first_name, last_name)
 VALUES ('T229901', 'Lynn', 'Malero');
 
-INSERT INTO registrations (registration_id, registration_date, license_id)
-VALUES ('A203391', '3/17/2017', 'T229901');
+INSERT INTO licenses (license_id, first_name, last_name)
+VALUES ('T000001', 'Lynn', 'Malero');
+
 
 INSERT INTO registrations (registration_id, registration_date, license_id)
-VALUES ('A75772', '3/17/2017', 'T000001');
+VALUES ('A203391', '2017/03/17', 'T229901');
+
+INSERT INTO registrations (registration_id, registration_date, license_id)
+VALUES ('A75772', '2017/03/17', 'T000001');
+
+SELECT * FROM licenses;
+SELECT * FROM registrations;
 
 -- Listing 7-7: CHECK constraint examples
 
@@ -105,10 +112,10 @@ CREATE TABLE check_constraint_example (
 
 -- Both of these will fail:
 INSERT INTO check_constraint_example (user_role)
-VALUES ('admin');
+VALUES ('Admin');
 
 INSERT INTO check_constraint_example (salary)
-VALUES (0);
+VALUES (10);
 
 -- Listing 7-8: UNIQUE constraint example
 
@@ -117,7 +124,7 @@ CREATE TABLE unique_constraint_example (
     first_name varchar(50),
     last_name varchar(50),
     email varchar(200),
-    CONSTRAINT email_unique UNIQUE (email)
+    CONSTRAINT email_unique UNIQUE (email)--the email column must contain unique values
 );
 
 INSERT INTO unique_constraint_example (first_name, last_name, email)
@@ -126,8 +133,10 @@ VALUES ('Samantha', 'Lee', 'slee@example.org');
 INSERT INTO unique_constraint_example (first_name, last_name, email)
 VALUES ('Betty', 'Diaz', 'bdiaz@example.org');
 
+SELECT * FROM unique_constraint_example;
+
 INSERT INTO unique_constraint_example (first_name, last_name, email)
-VALUES ('Sasha', 'Lee', 'slee@example.org');
+VALUES ('Sasha', 'Lee', 'seshalee@example.org');
 
 -- Listing 7-9: NOT NULL constraint example
 
@@ -163,6 +172,8 @@ CREATE TABLE new_york_addresses (
     postcode varchar(5),
     id integer CONSTRAINT new_york_key PRIMARY KEY
 );
+
+SELECT * FROM new_york_addresses;
 
 COPY new_york_addresses
 FROM 'C:\YourDirectory\city_of_new_york.csv'
