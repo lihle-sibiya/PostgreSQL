@@ -167,33 +167,23 @@ FROM us_counties_2010;
 
 -- Source: https://wiki.postgresql.org/wiki/Aggregate_Median
 
-CREATE OR REPLACE FUNCTION _final_median(anyarray)
-   RETURNS float8 AS
+CREATE OR REPLACE FUNCTION _final_median(numeric[])
+   RETURNS numeric AS
 $$
-  WITH q AS
-  (
+   SELECT AVG(val)
+   FROM (
      SELECT val
      FROM unnest($1) val
-     WHERE VAL IS NOT NULL
      ORDER BY 1
-  ),
-  cnt AS
-  (
-    SELECT COUNT(*) AS c FROM q
-  )
-  SELECT AVG(val)::float8
-  FROM
-  (
-    SELECT val FROM q
-    LIMIT  2 - MOD((SELECT c FROM cnt), 2)
-    OFFSET GREATEST(CEIL((SELECT c FROM cnt) / 2.0) - 1,0)
-  ) q2;
+     LIMIT  2 - MOD(array_upper($1, 1), 2)
+     OFFSET CEIL(array_upper($1, 1) / 2.0) - 1
+   ) sub;
 $$
-LANGUAGE sql IMMUTABLE;
+LANGUAGE 'sql' IMMUTABLE;
 
-CREATE AGGREGATE median(anyelement) (
+CREATE AGGREGATE median(numeric) (
   SFUNC=array_append,
-  STYPE=anyarray,
+  STYPE=numeric[],
   FINALFUNC=_final_median,
   INITCOND='{}'
 );
