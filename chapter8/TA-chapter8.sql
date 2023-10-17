@@ -192,11 +192,11 @@ FROM pls_fy2014_pupld14a;
 
 -- Listing 8-5: Using count() for the number of distinct values in a column
 
+SELECT DISTINCT salaries FROM pls_fy2014_pupld14a;
+
+
 SELECT count(libname)
 FROM pls_fy2014_pupld14a;
-
-SELECT DISTINCT libname FROM pls_fy2014_pupld14a;
-
 
 SELECT count(DISTINCT libname)
 FROM pls_fy2014_pupld14a;
