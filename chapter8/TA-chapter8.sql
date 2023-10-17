@@ -91,6 +91,8 @@ COPY pls_fy2014_pupld14a
 FROM 'C:\YourDirectory\pls_fy2014_pupld14a.csv'
 WITH (FORMAT CSV, HEADER);
 
+SELECT * FROM pls_fy2014_pupld14a;
+
 -- Listing 8-2: Creating and filling the 2009 Public Libraries Survey table
 
 CREATE TABLE pls_fy2009_pupld09a (
@@ -173,6 +175,8 @@ COPY pls_fy2009_pupld09a
 FROM 'C:\YourDirectory\pls_fy2009_pupld09a.csv'
 WITH (FORMAT CSV, HEADER);
 
+SELECT * FROM pls_fy2009_pupld09a;
+
 -- Listing 8-3: Using count() for table row counts
 
 SELECT count(*)
@@ -190,6 +194,9 @@ FROM pls_fy2014_pupld14a;
 
 SELECT count(libname)
 FROM pls_fy2014_pupld14a;
+
+SELECT DISTINCT libname FROM pls_fy2014_pupld14a;
+
 
 SELECT count(DISTINCT libname)
 FROM pls_fy2014_pupld14a;
