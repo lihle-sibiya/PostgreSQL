@@ -111,6 +111,27 @@ VALUES (2, 'Lee', 'Smith'),
        (4, 'Janet', 'King');
 
 -- Generating values for the IN operator
+
+--CREATE employees table from chapter6
+CREATE TABLE employees (
+    emp_id bigserial,
+    first_name varchar(100),
+    last_name varchar(100),
+    salary integer,
+    dept_id integer,
+    CONSTRAINT emp_key PRIMARY KEY (emp_id),
+    CONSTRAINT emp_dept_unique UNIQUE (emp_id, dept_id)
+);
+
+INSERT INTO employees (first_name, last_name, salary, dept_id)
+VALUES
+    ('Nancy', 'Jones', 62500, 1),
+    ('Lee', 'Smith', 59300, 1),
+    ('Soo', 'Nguyen', 83000, 2),
+    ('Janet', 'King', 95000, 2);
+
+SELECT * FROM employees;
+
 SELECT first_name, last_name
 FROM employees
 WHERE emp_id IN (
@@ -136,7 +157,7 @@ WHERE EXISTS (
 
                    
                    
--- Listing 12-7: Using a simple CTE to find large counties
+-- Listing 12-7: Using a simple Common Table Expression (CTE) to find large counties
 
 WITH
     large_counties (geo_name, st, p0010001)
@@ -212,6 +233,10 @@ CREATE TABLE ice_cream_survey (
 COPY ice_cream_survey
 FROM 'C:\YourDirectory\ice_cream_survey.csv'
 WITH (FORMAT CSV, HEADER);
+
+--Show the table
+SELECT * FROM ice_cream_survey
+LIMIT 5;
 
 -- Listing 12-11: Generating the ice cream survey crosstab
 
