@@ -53,6 +53,7 @@ SELECT est_number,
        company,
        city,
        st,
+	   st_copy,
        zip
 FROM meat_poultry_egg_inspect
 WHERE st IS NULL;
@@ -62,7 +63,7 @@ WHERE st IS NULL;
 SELECT company,
        count(*) AS company_count
 FROM meat_poultry_egg_inspect
-GROUP BY company
+GROUP BY company --only one represantative name(row) in group by
 ORDER BY company ASC;
 
 -- Listing 9-6: Using length() and count() to test the zip column
@@ -98,6 +99,8 @@ ALTER TABLE meat_poultry_egg_inspect ADD COLUMN st_copy varchar(2);
 
 UPDATE meat_poultry_egg_inspect
 SET st_copy = st;
+
+SELECT * FROM meat_poultry_egg_inspect;
 
 -- Listing 9-10: Checking values in the st and st_copy columns
 
@@ -158,8 +161,10 @@ SET zip_copy = zip;
 
 -- Listing 9-16: Modify codes in the zip column missing two leading zeros
 
+
 UPDATE meat_poultry_egg_inspect
 SET zip = '00' || zip
+SELECT * FROM meat_poultry_egg_inspect;
 WHERE st IN('PR','VI') AND length(zip) = 3;
 
 -- Listing 9-17: Modify codes in the zip column missing one leading zero
@@ -180,7 +185,7 @@ FROM 'C:\YourDirectory\state_regions.csv'
 WITH (FORMAT CSV, HEADER, DELIMITER ',');
 
 -- Listing 9-19: Adding and updating an inspection_date column
-
+SELECT * FROM state_regions;
 ALTER TABLE meat_poultry_egg_inspect ADD COLUMN inspection_date date;
 
 UPDATE meat_poultry_egg_inspect inspect
@@ -200,6 +205,7 @@ ORDER BY st;
 -- Listing 9-21: Delete rows matching an expression
 
 DELETE FROM meat_poultry_egg_inspect
+SELECT * FROM meat_poultry_egg_inspect;
 WHERE st IN('PR','VI');
 
 -- Listing 9-22: Remove a column from a table using DROP
