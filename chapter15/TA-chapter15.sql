@@ -26,6 +26,32 @@ LIMIT 5;
 
 -- Listing 15-3: Creating a view showing population change for US counties
 
+-- First create a table from Listing 6-13:
+CREATE TABLE us_counties_2000 (
+    geo_name varchar(90),              -- County/state name,
+    state_us_abbreviation varchar(2),  -- State/U.S. abbreviation
+    state_fips varchar(2),             -- State FIPS code
+    county_fips varchar(3),            -- County code
+    p0010001 integer,                  -- Total population
+    p0010002 integer,                  -- Population of one race:
+    p0010003 integer,                      -- White Alone
+    p0010004 integer,                      -- Black or African American alone
+    p0010005 integer,                      -- American Indian and Alaska Native alone
+    p0010006 integer,                      -- Asian alone
+    p0010007 integer,                      -- Native Hawaiian and Other Pacific Islander alone
+    p0010008 integer,                      -- Some Other Race alone
+    p0010009 integer,                  -- Population of two or more races
+    p0010010 integer,                  -- Population of two races
+    p0020002 integer,                  -- Hispanic or Latino
+    p0020003 integer                   -- Not Hispanic or Latino:
+);
+
+COPY us_counties_2000 -- populating the table from the csv file
+FROM 'C:\YourDirectory\us_counties_2000.csv'
+WITH (FORMAT CSV, HEADER);
+
+--then do Listing 15-3
+
 CREATE OR REPLACE VIEW county_pop_change_2010_2000 AS
     SELECT c2010.geo_name,
            c2010.state_us_abbreviation AS st,
@@ -39,7 +65,7 @@ CREATE OR REPLACE VIEW county_pop_change_2010_2000 AS
     ON c2010.state_fips = c2000.state_fips
        AND c2010.county_fips = c2000.county_fips
     ORDER BY c2010.state_fips, c2010.county_fips;
-
+	
 -- Listing 15-4: Selecting columns from the county_pop_change_2010_2000 view
 
 SELECT geo_name,
@@ -51,6 +77,8 @@ WHERE st = 'NV'
 LIMIT 5;
 
 -- Listing 15-5: Creating a view on the employees table
+-- optional:
+SELECT * FROM employees
 
 CREATE OR REPLACE VIEW employees_tax_dept AS
      SELECT emp_id,
