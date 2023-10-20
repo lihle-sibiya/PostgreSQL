@@ -30,7 +30,7 @@ INSERT INTO natural_key_example (license_id, first_name, last_name)
 VALUES ('T229901', 'Lynn', 'Malero');
 
 INSERT INTO natural_key_example (license_id, first_name, last_name)
-VALUES ('T229901', 'Sam', 'Tracy');
+VALUES ('T229902', 'Sam', 'Tracy');
 
 -- Listing 7-3: Declaring a composite primary key as a natural key
 CREATE TABLE natural_key_composite_example (
@@ -50,6 +50,8 @@ VALUES(775, '2017/01/23', 'Y');
 
 INSERT INTO natural_key_composite_example (student_id, school_day, present)
 VALUES(775, '2017/01/24', 'N');
+
+SELECT * FROM natural_key_composite_example;
 
 -- Listing 7-5: Declaring a bigserial column as a surrogate key
 
