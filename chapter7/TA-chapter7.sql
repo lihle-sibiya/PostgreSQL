@@ -55,11 +55,8 @@ VALUES(775, '2017/01/23', 'Y');
 INSERT INTO natural_key_composite_example (student_id, school_day, present)
 VALUES(775, '2017/01/24', 'N');
 
-<<<<<<< HEAD
 SELECT * FROM natural_key_composite_example;
 
-=======
->>>>>>> e206bd70c228d42574942204a66bf48965122b88
 -- Listing 7-5: Declaring a bigserial column as a surrogate key
 
 CREATE TABLE surrogate_key_example (

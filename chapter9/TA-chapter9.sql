@@ -265,14 +265,9 @@ COMMIT;
 
 CREATE TABLE meat_poultry_egg_inspect_backup AS
 SELECT *,
-<<<<<<< HEAD
  '2018-02-07'::date AS reviewe_date
 FROM meat_poultry_egg_inspect;
 SELECT * FROM meat_poultry_egg_inspect_backup
-=======
-       '2018-02-07'::date AS reviewed_date
-FROM meat_poultry_egg_inspect;
->>>>>>> e206bd70c228d42574942204a66bf48965122b88
 
 -- Listing 9-26: Swapping table names using ALTER TABLE
 
