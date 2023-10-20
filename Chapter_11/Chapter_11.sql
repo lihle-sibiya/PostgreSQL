@@ -95,8 +95,13 @@ FROM time_zone_test;
 
 -- Math with dates!
 
+<<<<<<< HEAD
 SELECT '1929/09/30'::date - '1929/09/27'::date;
 SELECT '1929/09/30'::date + '5 years'::interval;
+=======
+SELECT '9/30/1929'::date - '9/27/1929'::date;
+SELECT '9/30/1929'::date + '5 years'::interval;
+>>>>>>> e206bd70c228d42574942204a66bf48965122b88
 
 
 -- Taxi Rides

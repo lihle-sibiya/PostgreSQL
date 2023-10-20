@@ -146,7 +146,10 @@ SET company_standard = company;
 
 UPDATE meat_poultry_egg_inspect
 SET company_standard = 'Armour-Eckrich Meats'
+<<<<<<< HEAD
 --SELECT * FROM meat_poultry_egg_inspect
+=======
+>>>>>>> e206bd70c228d42574942204a66bf48965122b88
 WHERE company LIKE 'Armour%';
 
 SELECT company, company_standard
@@ -165,7 +168,11 @@ SET zip_copy = zip;
 
 UPDATE meat_poultry_egg_inspect
 SET zip = '00' || zip
+<<<<<<< HEAD
 SELECT zip FROM meat_poultry_egg_inspect
+=======
+SELECT * FROM meat_poultry_egg_inspect;
+>>>>>>> e206bd70c228d42574942204a66bf48965122b88
 WHERE st IN('PR','VI') AND length(zip) = 3;
 
 -- Listing 9-17: Modify codes in the zip column missing one leading zero
@@ -206,7 +213,11 @@ ORDER BY st;
 -- Listing 9-21: Delete rows matching an expression
 
 DELETE FROM meat_poultry_egg_inspect
+<<<<<<< HEAD
 --SELECT * FROM meat_poultry_egg_inspect
+=======
+SELECT * FROM meat_poultry_egg_inspect;
+>>>>>>> e206bd70c228d42574942204a66bf48965122b88
 WHERE st IN('PR','VI');
 
 -- Listing 9-22: Remove a column from a table using DROP
@@ -254,9 +265,14 @@ COMMIT;
 
 CREATE TABLE meat_poultry_egg_inspect_backup AS
 SELECT *,
+<<<<<<< HEAD
  '2018-02-07'::date AS reviewe_date
 FROM meat_poultry_egg_inspect;
 SELECT * FROM meat_poultry_egg_inspect_backup
+=======
+       '2018-02-07'::date AS reviewed_date
+FROM meat_poultry_egg_inspect;
+>>>>>>> e206bd70c228d42574942204a66bf48965122b88
 
 -- Listing 9-26: Swapping table names using ALTER TABLE
 

@@ -43,6 +43,7 @@ CREATE TABLE natural_key_composite_example (
 -- Listing 7-4: Example of a composite primary key violation
 
 INSERT INTO natural_key_composite_example (student_id, school_day, present)
+<<<<<<< HEAD
 VALUES(775, '2017/01/22', 'Y');
 
 INSERT INTO natural_key_composite_example (student_id, school_day, present)
@@ -50,11 +51,24 @@ VALUES(775, '2017/01/23', 'Y');
 
 INSERT INTO natural_key_composite_example (student_id, school_day, present)
 VALUES(775, '2017/01/24', 'N');
+=======
+VALUES(775, '1/22/2017', 'Y');
+
+INSERT INTO natural_key_composite_example (student_id, school_day, present)
+VALUES(775, '1/23/2017', 'Y');
+
+INSERT INTO natural_key_composite_example (student_id, school_day, present)
+VALUES(775, '1/23/2017', 'N');
+>>>>>>> e206bd70c228d42574942204a66bf48965122b88
 
 -- Listing 7-5: Declaring a bigserial column as a surrogate key
 
 CREATE TABLE surrogate_key_example (
+<<<<<<< HEAD
     order_number bigserial, -- auto generated
+=======
+    order_number bigserial,
+>>>>>>> e206bd70c228d42574942204a66bf48965122b88
     product_name varchar(50),
     order_date date,
     CONSTRAINT order_key PRIMARY KEY (order_number)
@@ -70,22 +84,35 @@ SELECT * FROM surrogate_key_example;
 -- Listing 7-6: A foreign key example
 
 CREATE TABLE licenses (
+<<<<<<< HEAD
     license_id varchar(10),--primary key defined by the constraint(will be unique)
     first_name varchar(50),
     last_name varchar(50),
     CONSTRAINT licenses_key PRIMARY KEY (license_id)--constraint is called license_key
+=======
+    license_id varchar(10),
+    first_name varchar(50),
+    last_name varchar(50),
+    CONSTRAINT licenses_key PRIMARY KEY (license_id)
+>>>>>>> e206bd70c228d42574942204a66bf48965122b88
 );
 
 CREATE TABLE registrations (
     registration_id varchar(10),
+<<<<<<< HEAD
     registration_date date,--the below person registered on this date
     license_id varchar(10) REFERENCES licenses (license_id),--license in the licenses table
+=======
+    registration_date date,
+    license_id varchar(10) REFERENCES licenses (license_id),
+>>>>>>> e206bd70c228d42574942204a66bf48965122b88
     CONSTRAINT registration_key PRIMARY KEY (registration_id, license_id)
 );
 
 INSERT INTO licenses (license_id, first_name, last_name)
 VALUES ('T229901', 'Lynn', 'Malero');
 
+<<<<<<< HEAD
 INSERT INTO licenses (license_id, first_name, last_name)
 VALUES ('T000001', 'Lynn', 'Malero');
 
@@ -98,6 +125,13 @@ VALUES ('A75772', '2017/03/17', 'T000001');
 
 SELECT * FROM licenses;
 SELECT * FROM registrations;
+=======
+INSERT INTO registrations (registration_id, registration_date, license_id)
+VALUES ('A203391', '3/17/2017', 'T229901');
+
+INSERT INTO registrations (registration_id, registration_date, license_id)
+VALUES ('A75772', '3/17/2017', 'T000001');
+>>>>>>> e206bd70c228d42574942204a66bf48965122b88
 
 -- Listing 7-7: CHECK constraint examples
 
@@ -112,10 +146,17 @@ CREATE TABLE check_constraint_example (
 
 -- Both of these will fail:
 INSERT INTO check_constraint_example (user_role)
+<<<<<<< HEAD
 VALUES ('Admin');
 
 INSERT INTO check_constraint_example (salary)
 VALUES (10);
+=======
+VALUES ('admin');
+
+INSERT INTO check_constraint_example (salary)
+VALUES (0);
+>>>>>>> e206bd70c228d42574942204a66bf48965122b88
 
 -- Listing 7-8: UNIQUE constraint example
 
@@ -124,7 +165,11 @@ CREATE TABLE unique_constraint_example (
     first_name varchar(50),
     last_name varchar(50),
     email varchar(200),
+<<<<<<< HEAD
     CONSTRAINT email_unique UNIQUE (email)--the email column must contain unique values
+=======
+    CONSTRAINT email_unique UNIQUE (email)
+>>>>>>> e206bd70c228d42574942204a66bf48965122b88
 );
 
 INSERT INTO unique_constraint_example (first_name, last_name, email)
@@ -133,10 +178,15 @@ VALUES ('Samantha', 'Lee', 'slee@example.org');
 INSERT INTO unique_constraint_example (first_name, last_name, email)
 VALUES ('Betty', 'Diaz', 'bdiaz@example.org');
 
+<<<<<<< HEAD
 SELECT * FROM unique_constraint_example;
 
 INSERT INTO unique_constraint_example (first_name, last_name, email)
 VALUES ('Sasha', 'Lee', 'seshalee@example.org');
+=======
+INSERT INTO unique_constraint_example (first_name, last_name, email)
+VALUES ('Sasha', 'Lee', 'slee@example.org');
+>>>>>>> e206bd70c228d42574942204a66bf48965122b88
 
 -- Listing 7-9: NOT NULL constraint example
 

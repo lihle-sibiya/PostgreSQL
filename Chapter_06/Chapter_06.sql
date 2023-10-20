@@ -37,6 +37,7 @@ VALUES
     ('Soo', 'Nguyen', 83000, 2),
     ('Janet', 'King', 95000, 2);
 
+<<<<<<< HEAD
 SELECT * FROM employees;
 
 SELECT first_name, last_name
@@ -46,6 +47,8 @@ SELECT id
 FROM retirees
 WHERE id = employees.id);
 
+=======
+>>>>>>> e206bd70c228d42574942204a66bf48965122b88
 -- Listing 6-2: Joining the employees and departments tables
 
 SELECT *
@@ -187,7 +190,11 @@ CREATE TABLE us_counties_2000 (
     p0020003 integer                   -- Not Hispanic or Latino:
 );
 
+<<<<<<< HEAD
 COPY us_counties_2000 -- populating the table from the csv file
+=======
+COPY us_counties_2000
+>>>>>>> e206bd70c228d42574942204a66bf48965122b88
 FROM 'C:\YourDirectory\us_counties_2000.csv'
 WITH (FORMAT CSV, HEADER);
 
