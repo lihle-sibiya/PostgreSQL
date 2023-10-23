@@ -109,19 +109,19 @@ SELECT * FROM employees;
 
 UPDATE employees_tax_dept
 SET last_name = 'Le Gere'
-WHERE emp_id = 5;
+WHERE emp_id = 9;
 
 SELECT * FROM employees_tax_dept;
 
 -- Bonus: This will fail because the salary column is not in the view
 UPDATE employees_tax_dept
 SET salary = 100000
-WHERE emp_id = 5;
+WHERE emp_id = 9;
 
 -- Listing 15-8: Deleting a row via the employees_tax_dept view
 
 DELETE FROM employees_tax_dept
-WHERE emp_id = 5;
+WHERE emp_id = 9;
 
 
 -- FUNCTIONS
@@ -286,7 +286,7 @@ SELECT * FROM grades;
 
 -- Update a grade
 UPDATE grades
-SET grade = 'C'
+SET grade = 'B'
 WHERE student_id = 1 AND course_id = 1;
 
 -- Now check the history
@@ -340,6 +340,8 @@ CREATE TRIGGER temperature_insert
     EXECUTE PROCEDURE classify_max_temp();
 
 -- Listing 15-24: Inserting rows to test the temperature_update trigger
+--set date style first
+SET datestyle = 'ISO, MDY';
 
 INSERT INTO temperature_test (station_name, observation_date, max_temp, min_temp)
 VALUES
