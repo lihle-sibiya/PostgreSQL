@@ -191,7 +191,9 @@ SELECT update_personal_days();
 
 -- Listing 15-14: Enabling the PL/Python procedural language
 
-CREATE EXTENSION plpythonu;
+CREATE EXTENSION plpython3u;
+SELECT * FROM pg_available_extensions WHERE name = 'plpython3u';
+--"C:\Program Files\PostgreSQL\16\lib\plpython3.dll"
 
 -- Listing 15-15: Using PL/Python to create the trim_county() function
 
