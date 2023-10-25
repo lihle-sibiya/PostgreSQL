@@ -58,7 +58,7 @@ CREATE TABLE state_regions (
 
 -- Listing 16-8: Saving query output to a file
 
--- Enter psql settings
+-- Enter psql settings: To make output format unaligned
 \a \f , \pset footer
 
 -- This will be the query
@@ -76,6 +76,9 @@ SELECT * FROM grades;
 -- createdb: Create a database named box_office
 
 createdb -U postgres -e box_office
+
+-- Connect to the newly created database
+psql -d box_office -U postgres
 
 
 -- Loading shapefiles into PostgreSQL
