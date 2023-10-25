@@ -110,7 +110,7 @@ SELECT count(*) FROM farmers_markets; -- should return 8,681 rows
 
 -- Add column
 ALTER TABLE farmers_markets ADD COLUMN geog_point geography(POINT,4326);
-
+SELECT * FROM farmers_markets; 
 -- Now fill that column with the lat/long
 UPDATE farmers_markets
 SET geog_point = ST_SetSRID(
@@ -119,7 +119,7 @@ SET geog_point = ST_SetSRID(
 
 -- Add a GiST index
 CREATE INDEX market_pts_idx ON farmers_markets USING GIST (geog_point);
-
+SELECT * FROM farmers_markets; 
 -- View the geography column
 SELECT longitude,
        latitude,
