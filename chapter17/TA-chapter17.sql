@@ -93,12 +93,13 @@ SHOW data_directory;
 
 -- BACKUP AND RESTORE
 
--- Listing 17-11: Backing up the analysis database with pg_dump
-pg_dump -d analysis -U [user_name] -Fc > analysis_backup.sql
+-- Listing 17-11: Backing up the analysis database with pg_dump on command prompt
+--pg_dump -d analysis -U [user_name] -Fc > analysis_backup.sql
+pg_dump -d analysis -U postgres -Fc > analysis_backup.sql
 
 -- Back up just a table
-pg_dump -t 'train_rides' -d analysis -U [user_name] -Fc > train_backup.sql 
+pg_dump -t "train_rides" -d analysis -U postgres -Fc > train_backup.sql 
 
 -- Listing 17-12: Restoring the analysis database with pg_restore
 
-pg_restore -C -d postgres -U postgres analysis_backup_custom.sql
+pg_restore -C -d postgres -U postgres analysis_backup.sql
