@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS public.salaries
     PRIMARY KEY (salary_id)
 );
 
-CREATE TABLE IF NOT EXISTS public."overtime hours"
+CREATE TABLE IF NOT EXISTS public.overtime_hours
 (
     overtime_id bigserial,
     overtime_hours integer,
@@ -61,7 +61,7 @@ ALTER TABLE IF EXISTS public.employees
     NOT VALID;
 
 
-ALTER TABLE IF EXISTS public."overtime hours"
+ALTER TABLE IF EXISTS public.overtime_hours
     ADD FOREIGN KEY (overtime_id)
     REFERENCES public.employees (emp_id) MATCH SIMPLE
     ON UPDATE NO ACTION
@@ -71,10 +71,6 @@ ALTER TABLE IF EXISTS public."overtime hours"
 END;
 
 SELECT * FROM employees
-SELECT * FROM departments
-SELECT * FROM
-SELECT * FROM
-SELECT * FROM
 
 --Update Suzanne's salary in Employees
 UPDATE employees
@@ -103,5 +99,20 @@ address = '15 Short Street, Newlands',
 email = 'lee@abc.com'
 WHERE emp_id = 2;
 
+--Rename Overtime hours table
+ALTER TABLE overtime hours RENAME TO overtime_hours;
+ALTER TABLE departments
+RENAME COLUMN city TO dept_city;
+
 SELECT * FROM employees
+SELECT * FROM departments
+SELECT * FROM roles
+SELECT * FROM salaries
+SELECT * FROM overtime_hours
+
+--add departments and city values from departments
+INSERT INTO overtime_hours (overtime_hours)
+VALUES 
+  (20);
+  ('Tax Specialist');
 
