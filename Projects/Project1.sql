@@ -69,3 +69,12 @@ ALTER TABLE IF EXISTS public."overtime hours"
     NOT VALID;
 
 END;
+
+SELECT * FROM employees
+
+--Update Suzanne's salary
+UPDATE employees
+SET salary = 10000
+WHERE first_name = 'Suzanne';
+
+
