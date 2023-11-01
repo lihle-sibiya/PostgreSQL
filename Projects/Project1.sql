@@ -186,3 +186,8 @@ FROM
   LEFT JOIN roles AS r ON e.role_id = r.role_id
   LEFT JOIN salaries AS s ON e.salary_id = s.salary_id
   LEFT JOIN overtime_hours AS oh ON e.overtime_id = oh.overtime_id;
+  
+  --Test foreign key contraints between employees and department tables
+  INSERT INTO employees (first_name, surname, dept_id)
+  VALUES
+    ('Owethu', 'Sibiya', 6);
