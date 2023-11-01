@@ -70,6 +70,20 @@ ALTER TABLE IF EXISTS public.overtime_hours
 
 END;
 
+ALTER TABLE public.overtime_hours
+ADD CONSTRAINT overtime_hours_emp_id_fkey FOREIGN KEY (overtime_id)
+REFERENCES public.employees (emp_id)
+MATCH SIMPLE
+ON UPDATE NO ACTION
+ON DELETE NO ACTION;
+
+ --create index 
+CREATE INDEX emp_id_idx ON employees (emp_id);
+CREATE INDEX dept_id_idx ON departments (dept_id);
+CREATE INDEX role_id_idx ON roles (role_id);
+CREATE INDEX salary_id_idx ON salaries (salary_id);
+CREATE INDEX overtime_id_idx ON overtime_hours (overtime_id);
+
 SELECT * FROM employees
 
 --Update Suzanne's salary in Employees
@@ -111,8 +125,64 @@ SELECT * FROM salaries
 SELECT * FROM overtime_hours
 
 --add departments and city values from departments
-INSERT INTO overtime_hours (overtime_hours)
-VALUES 
-  (20);
-  ('Tax Specialist');
+INSERT INTO employees (overtime_id)
+VALUES
+  (1),
+  (20),
+  (21),
+  (22),
+  (26);
+ 
+ --remove constraints
+  ALTER TABLE overtime_hours
+DROP CONSTRAINT overtime_hours_overtime_id_fkey;
+--update values
+UPDATE public.employees
+SET dept_id = 4
+   --salary_id = 1
+WHERE emp_id = 2;
 
+UPDATE public.employees
+SET dept_id = 3
+   --salary_id = 2
+WHERE emp_id = 3;
+
+UPDATE employees
+SET gender = 'male',
+    address = '200 Bhokwe Road, Bizana',
+	email = 'soo@abc.com',
+	salary_id = 3,
+	role_id = 3
+WHERE emp_id = 3;
+
+UPDATE public.employees
+SET gender = 'female',
+    address = '35 Umlanjwana Street, Mpumalanga',
+	email = 'janet@abc.com',
+	salary_id = 4,
+	role_id = 4
+WHERE emp_id = 4;
+
+UPDATE public.employees
+SET gender = 'female',
+    address = '190 Metsi Road, Centurion',
+	email = 'suzanne@abc.com',
+	salary_id = 5,
+	role_id = 1
+WHERE emp_id = 9;
+
+
+--JOIN tables
+SELECT
+  e.first_name,
+  e.surname,
+  d.dept_name AS department_name,
+  r.role AS job_title,
+  s.salary_pa AS salary_figure,
+  oh.overtime_hours AS overtime_hours_worked
+FROM
+  employees AS e
+  LEFT JOIN departments AS d ON e.dept_id = d.dept_id
+  LEFT JOIN roles AS r ON e.role_id = r.role_id
+  LEFT JOIN salaries AS s ON e.salary_id = s.salary_id
+  LEFT JOIN overtime_hours AS oh ON e.overtime_id = oh.overtime_id;
