@@ -71,10 +71,37 @@ ALTER TABLE IF EXISTS public."overtime hours"
 END;
 
 SELECT * FROM employees
+SELECT * FROM departments
+SELECT * FROM
+SELECT * FROM
+SELECT * FROM
 
---Update Suzanne's salary
+--Update Suzanne's salary in Employees
 UPDATE employees
 SET salary = 10000
 WHERE first_name = 'Suzanne';
 
+
+--Update last_name column
+ALTER TABLE employees
+RENAME COLUMN last_name TO surname;
+
+--Add columns on Employees
+ALTER TABLE employees
+ADD COLUMN gender varchar(50),
+ADD COLUMN address varchar(50),
+ADD COLUMN email varchar(50),
+ADD COLUMN role_id integer,
+ADD COLUMN salary_id integer,
+ADD COLUMN overtime_id integer;
+
+
+UPDATE employees
+SET 
+gender = 'male', 
+address = '15 Short Street, Newlands',
+email = 'lee@abc.com'
+WHERE emp_id = 2;
+
+SELECT * FROM employees
 
