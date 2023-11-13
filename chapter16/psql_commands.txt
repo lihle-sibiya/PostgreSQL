@@ -12,6 +12,7 @@ psql -d [database name] -U [username]
 psql -d analysis -U postgres
 
 -- Changing user and database name
+12345
 
 \c [database name] [user name]
 \c gis_analysis postgres

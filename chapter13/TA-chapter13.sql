@@ -137,6 +137,9 @@ FROM crime_reports;
 
 -- Listing 13-9: Updating the crime_reports date_1 column
 
+--First adjust date style
+SET datestyle = 'ISO, MDY';
+
 UPDATE crime_reports
 SET date_1 = 
 (
@@ -145,6 +148,7 @@ SET date_1 =
     (regexp_match(original_text, '\/\d{2}\n(\d{4})'))[1] 
         ||' US/Eastern'
 )::timestamptz;
+
 
 SELECT crime_id,
        date_1,
